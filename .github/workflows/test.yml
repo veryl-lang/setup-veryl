@@ -29,13 +29,14 @@ jobs:
 
     - name: Capture veryl version installed
       run: |
-        export VERYL_VERSION=$( veryl --version )
+        veryl --version
         echo 'VERYL_VERSION_INSTALLED<<EOF' >> $GITHUB_ENV
         veryl --version >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
 
     - name: Verify
       shell: python
+      if: ${{ matrix.version != 'latest' }}
       env:
         VERYL_VERSION_EXPECTED: ${{ matrix.version }}
       run: |
