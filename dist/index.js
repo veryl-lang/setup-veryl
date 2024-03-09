@@ -68,7 +68,7 @@ function getDownloadObject(version) {
   const platform = os.platform();
   const filename = `veryl-${ mapArch(os.arch()) }-${ mapOS(platform) }`;
   const binPath = platform === 'win32' ? '' : filename;
-  const url = `https://github.com/veryl-lang/veryl/releases/download/${ version }/${ filename }.zip`;
+  const url = `https://github.com/veryl-lang/veryl/releases/download/veryl-v${ version }/${ filename }.zip`;
   return {
     url,
     binPath
