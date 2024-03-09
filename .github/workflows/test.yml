@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        version: [0.7.1, 0.7.2]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup veryl
+      uses: ./
+      with:
+        version: ${{ matrix.version }}
+
+    - name: Capture veryl version installed
+      run: |
+        export VERYL_VERSION=$( veryl --version )
+        echo 'VERYL_VERSION_INSTALLED<<EOF' >> $GITHUB_ENV
+        veryl --version >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+
+    - name: Verify
+      shell: python
+      env:
+        GH_VERSION_EXPECTED: ${{ matrix.version }}
+      run: |
+        import sys, os
+        sys.exit(
+            int(not os.environ["VERYL_VERSION_EXPECTED"] in os.environ["VERYL_VERSION_INSTALLED"])
+        )
