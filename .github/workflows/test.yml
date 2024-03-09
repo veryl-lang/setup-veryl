@@ -37,7 +37,7 @@ jobs:
     - name: Verify
       shell: python
       env:
-        GH_VERSION_EXPECTED: ${{ matrix.version }}
+        VERYL_VERSION_EXPECTED: ${{ matrix.version }}
       run: |
         import sys, os
         sys.exit(
