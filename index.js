@@ -1,7 +1,7 @@
 const path = require('path');
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
-const Octokit = require("@octokit/action");
+const octo = require("@octokit/action");
 const { getDownloadObject } = require('./lib/utils');
 
 async function setup() {
@@ -10,7 +10,7 @@ async function setup() {
     const version = core.getInput('version');
 
     // Get latest version
-    const octokit = new Octokit();
+    const octokit = new octo.Octokit();
     const resp = await octokit.request('GET /repos/veryl-lang/veryl/releases/latest', {
       owner: 'veryl-lang',
       repo: 'veryl',

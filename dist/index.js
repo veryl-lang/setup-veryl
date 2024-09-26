@@ -7,7 +7,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 const path = __nccwpck_require__(1017);
 const core = __nccwpck_require__(2186);
 const tc = __nccwpck_require__(7784);
-const Octokit = __nccwpck_require__(6352);
+const octo = __nccwpck_require__(6352);
 const { getDownloadObject } = __nccwpck_require__(918);
 
 async function setup() {
@@ -16,7 +16,7 @@ async function setup() {
     const version = core.getInput('version');
 
     // Get latest version
-    const octokit = new Octokit();
+    const octokit = new octo.Octokit();
     const resp = await octokit.request('GET /repos/veryl-lang/veryl/releases/latest', {
       owner: 'veryl-lang',
       repo: 'veryl',
