@@ -1,7 +1,7 @@
 const path = require('path');
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
-const octo = require("@octokit/action");
+const octo = require("@octokit/rest");
 const { getDownloadObject } = require('./lib/utils');
 
 async function setup() {
