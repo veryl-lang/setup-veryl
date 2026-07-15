@@ -28,6 +28,14 @@ Version specification through `version` can be used.
         version: 0.7.2
 ```
 
+`nightly` can be used to install the latest nightly toolchain.
+
+```yaml
+    - uses: veryl-lang/setup-veryl@v1
+      with:
+        version: nightly
+```
+
 ### Publish documents through GitHub Pages
 
 ```yaml

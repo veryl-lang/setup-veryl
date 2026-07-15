@@ -68,8 +68,16 @@ function getDownloadObject(version) {
   const platform = os.platform();
   const filename = `veryl-${ mapArch(os.arch()) }-${ mapOS(platform) }`;
   const binPath = '';
-  const versionPath = version === 'latest' ? 'latest/download' : `download/v${ version }`;
-  const url = `https://github.com/veryl-lang/veryl/releases/${ versionPath }/${ filename }.zip`;
+
+  // nightly is not published as a GitHub release
+  let url;
+  if (version === 'nightly') {
+    url = `https://static.veryl-lang.org/toolchain/nightly/${ filename }.zip`;
+  } else {
+    const versionPath = version === 'latest' ? 'latest/download' : `download/v${ version }`;
+    url = `https://github.com/veryl-lang/veryl/releases/${ versionPath }/${ filename }.zip`;
+  }
+
   return {
     url,
     binPath
